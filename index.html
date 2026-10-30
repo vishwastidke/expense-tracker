@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Minimalist Expense & Budget Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1 class="app-title">Track to manage better</h1>
+    </header>
+
+    <!-- SECTION 1: QUICK EXPENSE ADDITION FORM (Top Priority) -->
+    <section class="card section-expense" aria-labelledby="sec1-heading">
+      <div class="section-label" id="sec1-heading">Add Expense</div>
+      <form id="expense-form" novalidate>
+        <div class="form-group">
+          <label for="expense-category">Category</label>
+          <select id="expense-category" required disabled>
+            <option value="" disabled selected>No categories yet</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="expense-amount"> Amount (₹)</label>
+          <input
+            type="number"
+            id="expense-amount"
+            inputmode="decimal"
+            step="any"
+            min="0.01"
+            placeholder="0.00"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="expense-notes">Note</label>
+          <input
+            type="text"
+            id="expense-notes"
+            maxlength="100"
+            placeholder="Short description (optional)"
+          />
+        </div>
+
+        <button type="submit" id="expense-submit-btn" class="btn btn-primary" disabled>
+          Add Expense
+        </button>
+      </form>
+    </section>
+
+    <!-- SECTION 2: TOTAL BUDGET CONFIGURATION -->
+    <section class="card section-budget" aria-labelledby="sec2-heading">
+      <div class="section-label" id="sec2-heading">Add Total Budget</div>
+      <form id="budget-form" class="inline-form" novalidate>
+        <div class="form-group flex-grow">
+          <label for="total-budget-input">Total Budget (₹)</label>
+          <input
+            type="number"
+            id="total-budget-input"
+            inputmode="decimal"
+            step="any"
+            min="0"
+            placeholder="50000"
+            required
+          />
+        </div>
+        <button type="submit" id="budget-submit-btn" class="btn btn-secondary align-bottom">
+          Set Budget
+        </button>
+      </form>
+      <div id="budget-warning" class="inline-warning hidden" role="alert">
+        Note: Allocated category budgets exceed total budget.
+      </div>
+    </section>
+
+    <!-- SECTION 3: CATEGORY CREATION FORM -->
+    <section class="card section-category-form" aria-labelledby="sec3-heading">
+      <div class="section-label" id="sec3-heading">Add Category</div>
+      <form id="category-form" novalidate>
+        <div class="form-group">
+          <label for="cat-name">Category Name</label>
+          <input
+            type="text"
+            id="cat-name"
+            maxlength="40"
+            placeholder="e.g., Food & Dining"
+            required
+          />
+          <div id="cat-name-error" class="field-error hidden">A category with this name already exists.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="cat-budget">Allocated Budget (₹)</label>
+          <input
+            type="number"
+            id="cat-budget"
+            inputmode="decimal"
+            step="any"
+            min="0"
+            placeholder="e.g., 5000"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="cat-notes">Category Notes</label>
+          <input
+            type="text"
+            id="cat-notes"
+            maxlength="120"
+            placeholder="Context / Scope (e.g., Office lunch & groceries)"
+          />
+        </div>
+
+        <button type="submit" id="cat-submit-btn" class="btn btn-secondary">
+          Add Category
+        </button>
+      </form>
+    </section>
+
+    <!-- SECTION 4: GLOBAL METRICS BANNER -->
+    <section class="card section-metrics" aria-label="Global Financial Metrics">
+      <div class="section-label">Overview</div>
+      <div class="metrics-grid">
+        <div class="metric-col">
+          <span class="metric-title">Total Budget</span>
+          <span class="metric-value" id="metric-total-budget">₹0.00</span>
+        </div>
+        <div class="metric-col">
+          <span class="metric-title">Total Spent</span>
+          <span class="metric-value" id="metric-total-spent">₹0.00</span>
+        </div>
+        <div class="metric-col">
+          <span class="metric-title">Remaining</span>
+          <span class="metric-value" id="metric-remaining">₹0.00</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: CATEGORY CARDS (Self-Contained Envelopes) -->
+    <section class="section-ledgers" aria-labelledby="sec5-heading">
+      <div class="section-label header-label" id="sec5-heading"></div>
+      <div id="category-cards-container" class="cards-list">
+        <!-- Dynamically rendered category envelope cards -->
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
